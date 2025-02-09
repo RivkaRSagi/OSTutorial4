@@ -4,23 +4,23 @@
 classDiagram
     class Jeopardy {
         - Player players[] //and array containing the play structs
-        - string input_buffer //buffer for processing the command-line input from users
+        - char* input_buffer //buffer for processing the command-line input from users
         + void main() //process the input buffer, tokenizes, then calls show results, updates player state
         + void tokenize(string input, string tokens[]) //processes the answer from the user to confirm
         + void show_results()//displays the game results for each player, from first to last place
     }
 
     class Player {
-        - string name//string containing the player's name
-        - int score//the player's score (money)
-        + void update_score(int points)//updates the score for that player given their name
-        + bool player_exists(string name)//returns true if the player name matches one of the existing players
+        - char* name //string containing the player's name
+        - int score //the player's score (money)
+        + void update_score(int points) //updates the score for that player given their name
+        + bool player_exists(string name) //returns true if the player name matches one of the existing players
     }
 
     class Question["question struct"] {
-        - string category //string containing the category, taken from a list
-        - string question //string containing question
-        - string answer
+        - char* category //string containing the category, taken from a list
+        - char* question //string containing question
+        - char* answer
         - int value //the dollar value of the question
         - bool answered //tracks if question has been answerd
         + bool validate_answer(string userAnswer)
@@ -28,7 +28,7 @@ classDiagram
     }
 
     class Questions["Game"] {
-        - string categories[][] //the list containing the valid question categories
+        - char categories[][] //the list containing the valid question categories
         - Question questions[] //array of question structs
         + void initialize_game() //initializes the array of questions for the game
         + void display_categories() //displays each of the remaining categories and questions that have not been answered
@@ -40,6 +40,16 @@ classDiagram
     Jeopardy --> Questions : uses
     Questions --> Question : contains
 ```
+
+## Rendering Logic Flow
+```mermaid
+graph TD
+refresh('JEOPARDY! in bolded, flashing yellow')-->show_results
+show_results('Displays each of the players, in underlined white text')-->display_categories('Displays the game grid, bolded green boxes with yellow score value inside)
+display_categories-->answer(flash white text)
+answer-->refresh
+```
+
 
 A project meant to satisfy the following requirements:
 
