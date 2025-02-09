@@ -24,8 +24,8 @@ void display_categories(void)
 
 // Displays the question for the category and dollar value
 void display_question(char *category, int value)
-{
-
+{//figure out how to fetch the question string
+printf("\033[5;33m%s\033[0m", question_string);//displays question in flashing yellow text
 }
 
 // Returns true if the answer is correct for the question for that category and dollar value

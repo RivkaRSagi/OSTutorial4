@@ -1,7 +1,7 @@
 /*
  * Tutorial 4 Jeopardy Project for SOFE 3950U / CSCI 3020U: Operating Systems
  *
- * Copyright (C) 2015, <GROUP MEMBERS>
+ * Copyright (C) 2025, <Julian Olano Medina, Rivka Sagi, Rhea, Korebe>
  * All rights reserved.
  *
  */
@@ -38,8 +38,17 @@ int main(int argc, char *argv[])
     initialize_game();
 
     // Prompt for players names
-    
+    for (int i=0; i < NUM_PLAYERS; i++){
+    printf("Player %d,What is your name?", i);
+    scanf("%s", player[i].name);
+    }
+
     // initialize each of the players in the array
+    for(int i=0; i < NUM_PLAYERS; i++){
+        player[i].score = 0;
+    }
+
+    questions game
 
     // Perform an infinite loop getting command input from users until game ends
     while (fgets(buffer, BUFFER_LEN, stdin) != NULL)
