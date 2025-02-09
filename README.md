@@ -1,5 +1,46 @@
 # OSTutorial4
 
+```mermaid
+classDiagram
+    class Jeopardy {
+        - Player players[] //and array containing the play structs
+        - string input_buffer //buffer for processing the command-line input from users
+        + void main() //process the input buffer, tokenizes, then calls show results, updates player state
+        + void tokenize(string input, string tokens[]) //processes the answer from the user to confirm
+        + void show_results()//displays the game results for each player, from first to last place
+    }
+
+    class Player {
+        - string name//string containing the player's name
+        - int score//the player's score (money)
+        + void update_score(int points)//updates the score for that player given their name
+        + bool player_exists(string name)//returns true if the player name matches one of the existing players
+    }
+
+    class Question["question struct"] {
+        - string category //string containing the category, taken from a list
+        - string question //string containing question
+        - string answer
+        - int value //the dollar value of the question
+        - bool answered //tracks if question has been answerd
+        + bool validate_answer(string userAnswer)
+        + bool already_answered()
+    }
+
+    class Questions["Game"] {
+        - string categories[][] //the list containing the valid question categories
+        - Question questions[] //array of question structs
+        + void initialize_game() //initializes the array of questions for the game
+        + void display_categories() //displays each of the remaining categories and questions that have not been answered
+        + void display_question(string category, int value)//displays the question for the cateogry and dollar value
+        + bool valid_answer(string category, int value, string answer)//returns if answer is correct for the question at that category and dollar value
+    }
+
+    Jeopardy --> Player : manages
+    Jeopardy --> Questions : uses
+    Questions --> Question : contains
+```
+
 A project meant to satisfy the following requirements:
 
 1. Your program must have a command line prompt that is used for all interactions with the Jeopardy system.
