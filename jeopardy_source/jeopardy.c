@@ -47,7 +47,7 @@ void show_results(player *players, int num_players);
 int main(int argc, char *argv[])
 {
     // An array of 4 players, may need to be a pointer if you want it set dynamically
-    player players[NUM_PLAYERS];
+    players player_list[NUM_PLAYERS];
     
     // Input buffer and and commands
     char buffer[BUFFER_LEN] = { 0 };
@@ -57,13 +57,13 @@ int main(int argc, char *argv[])
 
     // Prompt for players names
     for (int i=0; i < NUM_PLAYERS; i++){
-    printf("Player %d,What is your name?", i);
-    scanf("%s", players[i].name);
+    printf("Player %d,What is your name?\n", i);
+    scanf("%s", player_list[i].name);
     }
 
     // initialize each of the players in the array
     for(int i=0; i < NUM_PLAYERS; i++){
-        players[i].score = 0;
+        player_list[i].score = 0;
     }
 
     //questions game
@@ -71,11 +71,32 @@ int main(int argc, char *argv[])
     // Perform an infinite loop getting command input from users until game ends
     while (fgets(buffer, BUFFER_LEN, stdin) != NULL)
     {
+	printf("/033[5;33mJEOPARDY!/033[0m");
+	show_results();
         // Call functions from the questions and players source files
+	display_categories();
+	printf("Enter Player to Select Category:/n");
+	char[] name = scanf(%s)
+	while(!player_exists(player_list, NUM_PLAYERS, name)){
+	printf("Incorrect Name.\nEnter Player to Select Category:/n");
+	name = scanf(%s);
+	}
+	printf("Select Category");
+	// To do: extract selection from user.
+	printf("\033[5mAnswer:");
+	scanf("%s", buffer);
+	buffer = tokenize(buffer);
+	while(!valid_input){
+	printf("Wrong Answer!\n\033[5mNew Answer:")
+	fgets(buffer, sizeof(buffer), stdin);
+	buffer = tokenize(buffer)
+	}
+	
 
         // Execute the game until all questions are answered
 
         // Display the final results and exit
+       show_results();
     }
     return EXIT_SUCCESS;
 }
