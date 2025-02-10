@@ -118,9 +118,6 @@ void initialize_game(void)
     strcpy(questions[16].answer, "what is chiropractor");
     questions[16].value = 400;
     questions[16].answered=false;
-
-
-    // initialize each question struct and assign it to the questions array
 }
 
 // Displays each of the remaining categories and question dollar values that have not been answered
@@ -146,5 +143,11 @@ bool valid_answer(char *category, int value, char *answer)
 bool already_answered(char *category, int value)
 {
     // lookup the question and see if it's already been marked as answered
-    return false;
+    for(int i=0; i<16; i++){
+        if (category == questions[i].category && value == questions[i].value){
+            //return the status of the question
+            return questions[i].answered;
+        }
+    }
+
 }
