@@ -52,15 +52,15 @@ int main(int argc, char *argv[])
     // Prompt for players names
     for (int i=0; i < NUM_PLAYERS; i++){
     printf("Player %d,What is your name?", i);
-    scanf("%s", player[i].name);
+    scanf("%s", players[i].name);
     }
 
     // initialize each of the players in the array
     for(int i=0; i < NUM_PLAYERS; i++){
-        player[i].score = 0;
+        players[i].score = 0;
     }
 
-    questions game
+    //questions game
 
     // Perform an infinite loop getting command input from users until game ends
     while (fgets(buffer, BUFFER_LEN, stdin) != NULL)
