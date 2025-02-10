@@ -21,17 +21,23 @@
 
 // Processes the answer from the user containing what is or who is and tokenizes it to retrieve the answer.
 void tokenize(char *input, char **tokens){
-    const char *what = "What is";
-    const char *who = "Who is";
+    
+    // tokenizes the input by spaces
+    *tokens = strtok(input, " "); //Tokenizes "what" or "who"
+    *tokens = strtok(NULL, " "); // tokenizes "is"
+    *tokens = strtok(NULL, " "); // tokenizes the actual answer
+    
+    // const char *what = "What is";
+    // const char *who = "Who is";
 
-    if (strncasecmp(input, what, strlen(what)) == 0) {
-        input += strlen(what);
-    }
-    else if (strncasecmp(input, who, strlen(who)) == 0) {
-        input += strlen(who);
-    }
+    // if (strncasecmp(input, what, strlen(what)) == 0) {
+    //     input += strlen(what);
+    // }
+    // else if (strncasecmp(input, who, strlen(who)) == 0) {
+    //     input += strlen(who);
+    // }
 
-    *tokens = input;
+    // *tokens = input;
 };
 
 // Displays the game results for each player, their name and final score, ranked from first to last place
