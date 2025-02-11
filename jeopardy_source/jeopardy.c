@@ -47,8 +47,8 @@ void show_results(player *players, int num_players){
         }
         // swaps player into "hold"
         if (max != i){
-            players hold= player[i];
-            players[i] = player[max];
+            player hold= players[i];
+            players[i] = players[max];
             players[max] = hold;
             
         }
