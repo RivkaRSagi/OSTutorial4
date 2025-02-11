@@ -137,7 +137,7 @@ int main(int argc, char *argv[])
     while(flag){
         //ask for question level
         printf("please enter a difficulty level: \n");
-        scanf("%d", currentValue);
+        scanf("%d", &currentValue);
 
         //check if this is a valid value
         if(currentValue%100 == 0 && currentValue<=100 && currentValue >=400){
