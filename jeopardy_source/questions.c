@@ -174,7 +174,8 @@ void display_question(char *category, int value) {
 bool valid_answer(char *category, int value, char *answer) {
   // Ensure answer is not NULL before checking
   if (answer == NULL || strlen(answer) == 0) {
-    printf("unsafe!") return false;
+    printf("unsafe!");
+    return false;
   }
 
   for (int i = 0; i < 16; i++) {
