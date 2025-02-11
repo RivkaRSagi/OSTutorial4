@@ -8,6 +8,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <strings.h>
 #include <stdbool.h>
 #include "questions.h"
 #include "players.h"
@@ -24,7 +25,7 @@ void tokenize(char *input, char **tokens){
     const char *what = "What is";
     const char *who = "Who is";
 
-    if(strcmp(input, what, strlen(what)) == 0 || strncmp(input, who, strlen(who)) == 0){
+    if(strncasecmp(input, what, strlen(what)) == 0 || strncasecmp(input, who, strlen(who)) == 0){
         //if the first part of the answer matches what is or who is
         // tokenizes the input by spaces
         *tokens = strtok(input, " "); //Tokenize "what" or "who"
@@ -121,7 +122,7 @@ int main(int argc, char *argv[])
 
         //check if category entered is valid:
         for (int i=0; i<NUM_CATEGORIES; i++) {
-            if (strncasecmp(categories[i], currentCategory) == 0) { 
+            if (strncasecmp(categories[i], currentCategory, strlen(currentCategory)) == 0) { 
                 flag = false;
             }
         }
