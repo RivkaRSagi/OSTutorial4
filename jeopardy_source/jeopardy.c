@@ -41,7 +41,30 @@ void tokenize(char *input, char **tokens){
 };
 
 // Displays the game results for each player, their name and final score, ranked from first to last place
-void show_results(player *players, int num_players);
+void show_results(player *players, int num_players){
+    //checks for the max score by storing max score in a variable and swapping if another max is found using selection sort
+    for (int i=0; i <num_players -1; i++){
+        int max = i; //stores current player as max
+        for (int j= i+1; j < num_players; j++){
+            if (players[j].score > players[max].score){
+                max = j;//stores the player after i as max if it has a greater score
+            }
+        }
+        // swaps player into "hold"
+        if (max != i){
+            players hold= player[i];
+            players[i] = player[max];
+            players[max] = hold;
+            
+        }
+    }
+
+    //displays player result
+    printf("Player scoreboard: \n");
+    for (int i=0; i< num_players; i++){
+        printf("%s: %d \n", players[i].name, players[i].score);
+    }
+};
 
 
 int main(int argc, char *argv[])
