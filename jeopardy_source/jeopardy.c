@@ -1,7 +1,7 @@
 /*
  * Tutorial 4 Jeopardy Project for SOFE 3950U / CSCI 3020U: Operating Systems
  *
- * Copyright (C) 2025, <Julian Olano Medina, Rivka Sagi, Rhea, Korebe>
+ * Copyright (C) 2025, <Julian Olano Medina, Rivka Sagi, Rhea, Korede>
  * All rights reserved.
  *
  */
@@ -24,7 +24,7 @@ void tokenize(char *input, char **tokens){
     const char *what = "What is";
     const char *who = "Who is";
 
-    if(strncasecmp(input, what, strlen(what)) == 0 || strncasecmp(input, who, strlen(who)) == 0){
+    if(strcmp(input, what, strlen(what)) == 0 || strncmp(input, who, strlen(who)) == 0){
         //if the first part of the answer matches what is or who is
         // tokenizes the input by spaces
         *tokens = strtok(input, " "); //Tokenize "what" or "who"
@@ -90,7 +90,7 @@ int main(int argc, char *argv[])
     while (fgets(buffer, BUFFER_LEN, stdin) != NULL)
     {
 	printf("/033[5;33mJEOPARDY!/033[0m");
-	show_results(); //display current players, their names and scores
+	show_results(player_list, NUM_PLAYERS); //display current players, their names and scores
 
     char currentPlayer[MAX_LEN]; //holds the name of the current player
     bool flag = true;
