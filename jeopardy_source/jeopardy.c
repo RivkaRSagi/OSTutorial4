@@ -21,7 +21,7 @@
 // Put global environment variables here
 
 // Processes the answer from the user containing what is or who is and tokenizes it to retrieve the answer.
-void tokenize(char *input, char **tokens){
+void tokenize(char *input, char *tokens){
     const char *what = "What is";
     const char *who = "Who is";
 
