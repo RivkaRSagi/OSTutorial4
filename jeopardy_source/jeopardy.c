@@ -171,7 +171,7 @@ int main(int argc, char *argv[])
     scanf("%s", playerAnswer);
 
     //tokenize input
-    char *tokAnswer;
+    char **tokAnswer;
     tokenize(playerAnswer, tokAnswer);
 
 
