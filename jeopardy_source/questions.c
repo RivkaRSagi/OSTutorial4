@@ -133,8 +133,8 @@ void display_categories(void)
     printf("\033[35mCategories: %s, %s, %s, %s\n\033[0m",
         questions[0].category, questions[4].category, questions[8].category, questions[12].category);
 
-    for (int i = 0; i < 16; i += 4) {
-        for (int j = 0; j < 4; j++) {
+    for (int j = 0; j < 4; j++) {
+        for (int i = 0; i < 16; i += 4) {
             if (!questions[i + j].answered)
                 printf("\033[1;31m[\033[0;33m%d\033[1;31m]\033[0m   ", questions[i + j].value);
             else

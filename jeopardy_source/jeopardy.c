@@ -84,9 +84,10 @@
  
      // Perform an infinite loop getting command input from users until game ends
      while (fgets(buffer, BUFFER_LEN, stdin) != NULL) {
-         printf("\033[5;33mJEOPARDY!\033[0m");
+         printf("\033[5;33mJEOPARDY!\033[0m\n");
          show_results(player_list, NUM_PLAYERS); // display current players, their names and scores
  
+         display_categories();
          char currentPlayer[MAX_LEN]; // holds the name of the current player
          bool flag = true;
  
