@@ -177,7 +177,6 @@ bool valid_answer(char *category, int value, char *answer) {
     printf("unsafe!") return false;
   }
 
-  printf("i am in valid ans function");
   for (int i = 0; i < 16; i++) {
     if (strcmp(category, questions[i].category) == 0 &&
         value == questions[i].value) {
