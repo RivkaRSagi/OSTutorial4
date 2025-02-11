@@ -12,6 +12,15 @@
 #include <stdbool.h>  // Added for bool type
 #include "questions.h"
 
+char categories[NUM_CATEGORIES][MAX_LEN] = {  // Definition
+    "animated movies", 
+    "animals", 
+    "vehicles",
+    "professions"
+};
+
+question questions[NUM_QUESTIONS];
+
 // Initializes the array of questions for the game
 void initialize_game(void)
 {

@@ -1,10 +1,3 @@
-/*
- * Tutorial 4 Jeopardy Project for SOFE 3950U / CSCI 3020U: Operating Systems
- *
- * Copyright (C) 2015, <GROUP MEMBERS>
- * All rights reserved.
- *
- */
 #ifndef QUESTIONS_H_
 #define QUESTIONS_H_
 
@@ -12,17 +5,10 @@
 
 #define MAX_LEN 256
 #define NUM_CATEGORIES 4
-// The number of questions, you can use this in your functions in
-// questions.c, this can be accessed in questions.c
 #define NUM_QUESTIONS 16
 
-// List of 4 categories as array of strings
-static char categories[NUM_CATEGORIES][MAX_LEN] = {
-    "animated movies", 
-    "animals", 
-    "vehicles",
-    "professions"
-};
+// List of 4 categories as an array of strings
+extern char categories[NUM_CATEGORIES][MAX_LEN];  // Remove static to make this accessible across translation units
 
 // Questions struct for each question
 typedef struct {
@@ -34,22 +20,13 @@ typedef struct {
 } question;
 
 // An array of 12 questions (4 for each category), initialized in initialize_game
-// this may need to be a pointer if you want it set dynamically
-question questions[NUM_QUESTIONS];
+extern question questions[NUM_QUESTIONS];  // Extern declaration for questions
 
-// Initializes the array of questions for the game
+// Function declarations
 extern void initialize_game(void);
-
-// Displays each of the remaining categories and question dollar values that have not been answered
 extern void display_categories(void);
-
-// Displays the question for the category and dollar value
 extern void display_question(char *category, int value);
-
-// Returns true if the answer is correct for the question for that category and dollar value
 extern bool valid_answer(char *category, int value, char *answer);
-
-// Returns true if the question has already been answered
 extern bool already_answered(char *category, int value);
 
 #endif /* QUESTIONS_H_ */

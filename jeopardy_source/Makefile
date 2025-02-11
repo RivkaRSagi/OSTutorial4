@@ -5,7 +5,7 @@ LIBS =
 SOURCES = jeopardy.c questions.c players.c
 OBJECTS = $(subst .c,.o,$(SOURCES))
 EXE = jeopardy.exe
-.PHONY: clean help
+.PHONY: clean cleanup help
 
 jeopardy.exe : jeopardy.o questions.o players.o
 	$(CC) $(CFLAGS) $^ $(LIBS) -o $@ 
@@ -15,13 +15,16 @@ jeopardy.exe : jeopardy.o questions.o players.o
 
 all : $(EXE)
 
+# Use del command for Windows compatibility
 clean:
-	rm -f $(OBJECTS) $(EXE) *~
+	del /f /q $(OBJECTS) $(EXE) *~
 
+# Use del command for Windows compatibility
 cleanup:
-	rm -f $(OBJECTS) *~
+	del /f /q $(OBJECTS) *~
 
 help:
 	@echo "Valid targets:"
 	@echo "  all:    generates all binary files"
 	@echo "  clean:  removes .o and .exe files"
+	@echo "  cleanup: removes .o files"
