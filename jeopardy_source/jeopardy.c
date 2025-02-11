@@ -21,23 +21,18 @@
 
 // Processes the answer from the user containing what is or who is and tokenizes it to retrieve the answer.
 void tokenize(char *input, char **tokens){
-    
-    // tokenizes the input by spaces
-    *tokens = strtok(input, " "); //Tokenizes "what" or "who"
-    *tokens = strtok(NULL, " "); // tokenizes "is"
-    *tokens = strtok(NULL, " "); // tokenizes the actual answer
-    
-    // const char *what = "What is";
-    // const char *who = "Who is";
+    const char *what = "What is";
+    const char *who = "Who is";
 
-    // if (strncasecmp(input, what, strlen(what)) == 0) {
-    //     input += strlen(what);
-    // }
-    // else if (strncasecmp(input, who, strlen(who)) == 0) {
-    //     input += strlen(who);
-    // }
-
-    // *tokens = input;
+    if(strncasecmp(input, what, strlen(what)) == 0 || strncasecmp(input, who, strlen(who)) == 0){
+        //if the first part of the answer matches what is or who is
+        // tokenizes the input by spaces
+        *tokens = strtok(input, " "); //Tokenize "what" or "who"
+        *tokens = strtok(NULL, " "); // tokenize "is"
+        *tokens = strtok(NULL, " "); // tokenizes the actual answer
+    }else{
+        *tokens = "\0";
+    }
 };
 
 // Displays the game results for each player, their name and final score, ranked from first to last place
@@ -70,7 +65,7 @@ void show_results(player *players, int num_players){
 int main(int argc, char *argv[])
 {
     // An array of 4 players, may need to be a pointer if you want it set dynamically
-    players player_list[NUM_PLAYERS];
+    player player_list[NUM_PLAYERS];
     
     // Input buffer and and commands
     char buffer[BUFFER_LEN] = { 0 };
@@ -84,7 +79,7 @@ int main(int argc, char *argv[])
     scanf("%s", player_list[i].name);
     }
 
-    // initialize each of the players in the array
+    // initialize score of each of the players in the array
     for(int i=0; i < NUM_PLAYERS; i++){
         player_list[i].score = 0;
     }
@@ -95,31 +90,118 @@ int main(int argc, char *argv[])
     while (fgets(buffer, BUFFER_LEN, stdin) != NULL)
     {
 	printf("/033[5;33mJEOPARDY!/033[0m");
-	show_results();
-        // Call functions from the questions and players source files
-	display_categories();
-	printf("Enter Player to Select Category:/n");
-	char[] name = scanf(%s)
-	while(!player_exists(player_list, NUM_PLAYERS, name)){
-	printf("Incorrect Name.\nEnter Player to Select Category:/n");
-	name = scanf(%s);
-	}
-	printf("Select Category");
-	// To do: extract selection from user.
-	printf("\033[5mAnswer:");
-	scanf("%s", buffer);
-	buffer = tokenize(buffer);
-	while(!valid_input){
-	printf("Wrong Answer!\n\033[5mNew Answer:")
-	fgets(buffer, sizeof(buffer), stdin);
-	buffer = tokenize(buffer)
-	}
-	
+	show_results(); //display current players, their names and scores
 
-        // Execute the game until all questions are answered
-
-        // Display the final results and exit
-       show_results();
+    char currentPlayer[MAX_LEN]; //holds the name of the current player
+    bool flag = true;
+    //while loop to get next player
+    while(flag){
+        //ask for the name of the player
+        printf("Enter the name of the player to go next: \n");
+        scanf("%s", currentPlayer);
+        
+        //check if the player entered is valid, if not keep looping
+        if(player_exists){
+            flag = false;
+        } else{
+            printf("this player does not exist, try again\n");
+        }
     }
+
+    printf("hello %s, ", currentPlayer);
+
+
+    char currentCategory[MAX_LEN];
+    int currentValue;
+    flag = true;//reset flag
+    while(flag){
+        //ask for category
+        printf("please enter a category: \n");
+        scanf("%s", currentCategory);
+
+        //check if category entered is valid:
+        for (int i=0; i<NUM_CATEGORIES; i++) {
+            if (strncasecmp(categories[i], currentCategory) == 0) { 
+                flag = false;
+            }
+        }
+
+        //if category entered is not valid:
+        if(flag){
+            printf("this is not a valid category, try again\n");
+        }
+    }
+    printf("you have selected %s, ", currentCategory);
+
+    while(flag){
+        //ask for question level
+        printf("please enter a difficulty level: \n");
+        scanf("%d", currentValue);
+
+        //check if this is a valid value
+        if(currentValue%100 == 0 && currentValue<=100 && currentValue >=400){
+            //if valid, then check if the question was answered already
+            if(already_answered){
+                printf("this question was already answered, try again\n");
+            }else{
+                flag = false;//value for question is accepted, exit loop
+            }
+        }else{
+            //if number entered is not a valid question value
+            printf("this is not a recognized difficulty level, try again\n");
+        }
+    }
+
+    //set the answered value for the question to true and save the answer to check later
+    char *correctAnswer;
+    for(int i=0; i<16; i++){
+        if (currentCategory == questions[i].category && currentValue == questions[i].value){
+            correctAnswer = questions[i].answer;
+            questions[i].answered = true;
+        }
+    }
+
+    //call the display question function
+    display_question(currentCategory, currentValue);
+
+    char playerAnswer[MAX_LEN];
+    //prompt user for answer to the question
+    printf("please enter your answer: \n");
+    scanf("%s", playerAnswer);
+
+    //tokenize input
+    char **tokAnswer;
+    tokenize(playerAnswer, tokAnswer);
+
+
+    //check if answer is correct
+    if(valid_answer(currentCategory, currentValue, tokAnswer)){
+        //update scores
+        printf("That is correct! you get %d points\n", currentValue);
+        update_score(player_list, NUM_PLAYERS, currentPlayer, currentValue);
+    } else{
+        printf("sorry, the answer was actually: %s\n", correctAnswer);
+    }
+
+    bool keepPlaying = false;
+    for(int i=0; i<16; i++){
+        if(questions[i].answered == false){
+            keepPlaying = true;
+        }
+    }
+    if (!keepPlaying) break;
+    }
+
+    show_results(player_list, NUM_PLAYERS);
+    //check who winner is
+    int maxScore = 0;
+    for(int i=0; i<4; i++){
+        if(player_list[i].score > maxScore){
+            maxScore = i;
+        }
+    }
+
+    //display who the winner is 
+    printf("Congratulations, %s, you win with a score of %d\n", player_list[maxScore].name, player_list[maxScore].score);
     return EXIT_SUCCESS;
 }

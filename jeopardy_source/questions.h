@@ -14,7 +14,7 @@
 #define NUM_CATEGORIES 4
 // The number of questions, you can use this in your functions in
 // questions.c, this can be accessed in questions.c
-#define NUM_QUESTIONS 12
+#define NUM_QUESTIONS 16
 
 // List of 4 categories as array of strings
 static char categories[NUM_CATEGORIES][MAX_LEN] = {
