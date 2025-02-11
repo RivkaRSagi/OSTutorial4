@@ -148,7 +148,7 @@ void display_question(char *category, int value)
 }
 
 // Returns true if the answer is correct
-bool valid_answer(char *category, int value, char **answer)
+bool valid_answer(char *category, int value, char *answer)
 {
     for (int i = 0; i < 16; i++) {
         if (strcmp(category, questions[i].category) == 0 && value == questions[i].value) {
