@@ -14,7 +14,7 @@
 #include <strings.h>
 
 char categories[NUM_CATEGORIES][MAX_LEN] = { // Definition
-    "animated movies", "animals", "vehicles", "professions"};
+    "animated_movies", "animals", "vehicles", "professions"};
 
 question questions[NUM_QUESTIONS];
 
@@ -22,22 +22,22 @@ question questions[NUM_QUESTIONS];
 void initialize_game(void) {
   // Initialize questions, 4 per category (total: 16)
 
-  // First category: Animated Movies
-  strcpy(questions[0].category, "animated movies");
+  // First category: Animated_Movies
+  strcpy(questions[0].category, "animated_movies");
   strcpy(questions[0].question, "A movie about an ogre and a donkey who go on "
                                 "an adventure to save a swamp");
   strcpy(questions[0].answer, "Shrek");
   questions[0].value = 100;
   questions[0].answered = false;
 
-  strcpy(questions[1].category, "animated movies");
+  strcpy(questions[1].category, "animated_movies");
   strcpy(questions[1].question,
          "A Disney movie about a flying house, an old man, a boy, and a dog");
   strcpy(questions[1].answer, "Up");
   questions[1].value = 200;
   questions[1].answered = false;
 
-  strcpy(questions[2].category, "animated movies");
+  strcpy(questions[2].category, "animated_movies");
   strcpy(questions[2].question,
          "A pet chameleon who thinks he is a famous actor goes to the wild "
          "west and becomes the sheriff");
@@ -45,7 +45,7 @@ void initialize_game(void) {
   questions[2].value = 300;
   questions[2].answered = false;
 
-  strcpy(questions[3].category, "animated movies");
+  strcpy(questions[3].category, "animated_movies");
   strcpy(questions[3].question,
          "A movie about a society of animals that coexist in a city that does "
          "not discriminate between predator and prey");
