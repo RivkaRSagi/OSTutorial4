@@ -102,7 +102,7 @@ int main(int argc, char *argv[])
         scanf("%s", currentPlayer);
         
         //check if the player entered is valid, if not keep looping
-        if(player_exists){
+        if(player_exists(player_list, NUM_PLAYERS, currentPlayer)){
             flag = false;
         } else{
             printf("this player does not exist, try again\n");
@@ -142,7 +142,7 @@ int main(int argc, char *argv[])
         //check if this is a valid value
         if(currentValue%100 == 0 && currentValue<=100 && currentValue >=400){
             //if valid, then check if the question was answered already
-            if(already_answered){
+            if(already_answered(currentCategory, currentValue)){
                 printf("this question was already answered, try again\n");
             }else{
                 flag = false;//value for question is accepted, exit loop
